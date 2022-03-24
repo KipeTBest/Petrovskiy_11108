@@ -1,0 +1,46 @@
+package Sort;
+
+public class SortingAlg {
+
+    // Переменная, отвечающая за счет итераций в сортировке
+    private int iter = 0;
+
+    private long time = 0;
+
+    // Сортировка
+    public int patienceSort(int[] nums) {
+        time = System.nanoTime();
+
+        int[] piles = new int[nums.length];
+        int numPiles = 0;
+        for (int i: nums) {
+            iter++;
+            int l = 0;
+            int r = numPiles;
+            while (l < r) {
+                int mid = l + ((r - l) / 2);
+                if (piles[mid] < i)
+                    l = mid + 1;
+                else
+                    r = mid;
+            }
+            piles[l] = i;
+            if (l == numPiles)
+                numPiles++;
+        }
+
+        time = System.nanoTime() - time;
+
+        return numPiles;
+    }
+
+    // Метод, передающий время работы сортировки
+    public long returnTime() {
+        return time;
+    }
+
+    // Метод, передающий количество итераций в сортировке
+    public int returnIteration() {
+        return iter;
+    }
+}
