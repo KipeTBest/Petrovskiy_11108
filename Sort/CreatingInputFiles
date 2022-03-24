@@ -1,0 +1,78 @@
+package Sort;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+public class CreatingInputFiles {
+
+    // Создается рандомное число от 50 до 100. Оно отвечает за количество
+    public static int createRandomCountOfFiles() {
+        int a = 50; // от 50
+        int b = 101; // до 100
+        int randomCount = (int) (a + (Math.random() * ((b - a) + 1)));
+        System.out.println("Количество созданных файлов: " + (randomCount + 1));
+        return randomCount;
+    }
+
+    // Создает createRandomCountOfFiles пустых файлов
+    public static int createFiles() {
+        int countOfFiles = createRandomCountOfFiles() + 1; // + 1 делаем, так как нам нужно, чтобы название файлов начиналось не с 0, а с 1
+        for (int i = 1; i < countOfFiles + 1; i++) { // создается от 1 до countOfFiles файлов
+            try {
+                File f = new File("C:\\Users\\kipet\\IdeaProjects\\petrovskiy_11108\\2s\\SemWork\\Files\\" + i + ".txt");
+                if (f.createNewFile()) {
+                    // System.out.println("Файл успешно создан!"); // Я много раз генерировал файлы и мне надоело видеть эту надпись
+                    continue;
+                } else {
+                    System.out.println("Ошибка! Sort.CreatingInputFiles 23");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        return countOfFiles;
+    }
+
+    // Создается рандомное число для длины массива
+    public static int createRandomCountOfArrays() {
+        int a = 100; // от 100
+        int b = 10001; // до 10000
+        int randomCount = (int) (a + (Math.random() * ((b - a) + 1)));
+        return randomCount;
+    }
+
+    // Заполняет массив длиной createRandomCountOfArrays рандомными числами от a до b
+    public static String[] printArray(int count) {
+        int[] array = new int[count];
+        String[] newArray = new String[count];
+        int a = -100000;
+        int b = 100000;
+        for (int i = 0; i < count; i++) {
+            array[i] = (int) (a + (Math.random() * ((b - a) + 1)));
+        }
+        // Перезапись массива интов в массив строк
+        for (int i = 0; i < count; i++) {
+            newArray[i] = array[i] + " ";
+        }
+        return newArray;
+    }
+
+    // Метод, заполняющий файлы массивами
+    public static void fillFiles() {
+        int countOfFiles = createFiles();
+        for (int i = 1; i < countOfFiles + 1; i++) { // опять же. Нам нужно идти не с 0, а с 1
+            try {
+                String[] array = printArray(createRandomCountOfArrays());
+                OutputStream f = new FileOutputStream("C:\\Users\\kipet\\IdeaProjects\\petrovskiy_11108\\2s\\SemWork\\Files\\" + i + ".txt");
+                for (int j = 0; j < array.length; j++) {
+                    f.write(String.valueOf(array[j]).getBytes(StandardCharsets.UTF_8));
+                }
+                f.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
