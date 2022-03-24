@@ -1,0 +1,40 @@
+package Sort;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
+public class CreatingFullInfoFile {
+
+    // Создание файла с полной информацией (№ файла | время работы | количество шагов | результат сортировки)
+    public static void fillFullInfo(long time, int iteration, int i, int sort, int plus, int minus) {
+        try {
+            File f = new File("C:\\Users\\kipet\\IdeaProjects\\petrovskiy_11108\\2s\\SemWork\\Files\\FullInfoFile.txt");
+            if (f.createNewFile()) {
+                // System.out.println("Файл успешно создан!"); // Я много раз генерировал файлы и мне надоело видеть эту надпись
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        String file = "C:\\Users\\kipet\\IdeaProjects\\petrovskiy_11108\\2s\\SemWork\\Files\\FullInfoFile.txt";
+        String num = i + " ";
+        String t = time + " ";
+        String it = iteration + " ";
+        String s = sort + " ";
+        String pl = plus + " ";
+        String mi = minus + "\n";
+
+        try {
+            Files.write(Paths.get(file), num.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(file), t.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(file), it.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(file), s.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(file), pl.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(file), mi.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
