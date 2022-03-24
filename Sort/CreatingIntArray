@@ -1,0 +1,25 @@
+package Sort;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class CreatingIntArray {
+
+    // Чтение из файла и превращение массива строк в массив интов
+    public static int[] readFileAndReturnIntArray(int i) throws IOException {
+        String file = "C:\\Users\\kipet\\IdeaProjects\\petrovskiy_11108\\2s\\SemWork\\Files\\" + i + ".txt";
+        String content = Files.lines(Paths.get(file)).reduce("", String::concat);
+        String[] subContent = content.split(" ");
+        int[] intArray = new int[subContent.length];
+        for (int j = 0; j < subContent.length; j++) {
+            try {
+                Integer i1 = new Integer(subContent[j]);
+                intArray[j] = i1;
+            } catch (NumberFormatException e) {
+                System.err.println("Ошибка! CreatingIntArray 19");
+            }
+        }
+        return intArray;
+    }
+}
